@@ -10,6 +10,7 @@ const PORT = process.env.PORT || 3000;
 
 //Importar rutas
 const usuarioRoute = require('./routes/usuario.route');
+const registroHijosRoute = require('./routes/registroHijos.route');
 
 app.use(express.json()); //Habilita el manejo de JSON en las peticiones 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -24,6 +25,7 @@ mongoose.connect(process.env.MONGODB_URI,{
 .catch(error=> console.log('Ocurrio un error al conectarse con MongoDB: ', error));
 
 app.use('/usuarios', usuarioRoute);
+app.use('/registroHijos', registroHijosRoute);
 
 app.get('/', (req,res)=> {
     res.send('Servidor en funcionamiento');
