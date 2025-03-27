@@ -1,10 +1,10 @@
 const mongoose = require('mongoose');
 
 const schemaRegistrohijos = new mongoose.Schema({
-    nombreHijo:{
+    nombrecompletoHijo:{
         type: String,
         required: true,
-        unique: false
+        unique: true
     },
     nivelEducativo:{
         type: String,
