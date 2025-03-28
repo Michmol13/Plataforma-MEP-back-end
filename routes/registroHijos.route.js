@@ -53,5 +53,5 @@ router.delete('/eliminarRegistro', async (req, res) => {
     }
 });
 
-  
+
 module.exports = router;
