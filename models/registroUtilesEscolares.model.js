@@ -6,7 +6,7 @@ const schemaRegistroUtilesEscolares = new mongoose.Schema({
         required: true,
         unique: true
     },
-    categoría:{
+    categoria:{
         type: String,
         required: true,
         unique: false
@@ -16,7 +16,7 @@ const schemaRegistroUtilesEscolares = new mongoose.Schema({
         required: true,
         unique: false
     },
-    descripción:{
+    descripcion:{
         type: Number,
         required: true,
         unique: false
