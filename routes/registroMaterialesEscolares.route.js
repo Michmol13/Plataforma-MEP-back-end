@@ -10,7 +10,7 @@ router.post('/', async(req,res) =>{
     }
 
     try{
-        const RegistroMaterialesEscolares = new RegistroMaterialesEscolares ({nombreMaterial, descripcion, categoria, unidadMedida, estado});
+        const nuevoRegistroMaterialesEscolares = new RegistroMaterialesEscolares ({nombreMaterial, descripcion, categoria, unidadMedida, estado});
         await nuevoRegistroMaterialesEscolares.save();
         res.status(201).json(nuevoRegistroMaterialesEscolares);
     }catch(error){
@@ -18,13 +18,13 @@ router.post('/', async(req,res) =>{
     }
 } );
 
-router.get('/', async(req,res) =>{
-    try{
-        const RegistroMaterialesEscolares = await RegistroMaterialesEscolares.find();
-        res.json(RegistroMaterialesEscolares);
-    }catch(error){
-        res.status(500).json({msj: error.message})
-    }
+router.get('/', async (req, res) => {
+  try {
+      const materiales = await RegistroMaterialesEscolares.find();
+      res.json(materiales);
+  } catch (error) {
+      res.status(500).json({ msj: error.message });
+  }
 });
 
 router.delete('/eliminarRegistro', async (req, res) => {

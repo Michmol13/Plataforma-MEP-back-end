@@ -17,7 +17,7 @@ const schemaRegistroMaterialesEscolares = new mongoose.Schema({
         unique: false
     },
     unidadMedida:{
-        type: Number,
+        type: String,
         required: true,
         unique: false
     },
