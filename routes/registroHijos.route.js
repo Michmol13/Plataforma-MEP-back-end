@@ -28,36 +28,30 @@ router.get('/', async(req,res) =>{
 });
 
 
-router.delete('/eliminar', async (req, res) => {
+router.delete('/eliminarRegistro', async (req, res) => {
     try {
-      const estudianteDuplicado = await Registrohijos.aggregate([
-        {
-          $group: {
-            _id: { nombrecompletoHijo: "$nombrecompletoHijo", nivelEducativo: "$nivelEducativo", annoLectivo: "$annoLectivo" },
-            count: { $sum: 1 },
-            ids: { $push: "$_id" }
-          }
-        },
-        {
-          $match: {
-            count: { $gt: 1 }
-          }
+        const { nombrecompletoHijo, nivelEducativo, annoLectivo } = req.body;
+
+        if (!nombrecompletoHijo || !nivelEducativo || !annoLectivo) {
+            return res.status(400).json({ message: 'Se requiere nombrecompletoHijo, nivelEducativo y annoLectivo.' });
         }
-      ]);
 
+        const resultado = await Registrohijos.deleteOne({
+            nombrecompletoHijo,
+            nivelEducativo,
+            annoLectivo
+        });
 
-      for (const grupo of estudianteDuplicado) {
-        const idsAEliminar = grupo.ids.slice(1);
-        await Registrohijos.deleteMany({ _id: { $in: idsAEliminar } });
-        console.log(`Se eliminaron ${idsAEliminar.length} registros duplicados`);
-      }
-  
-      res.status(200).json({ message: 'Registros duplicados eliminados exitosamente.' });
+        if (resultado.deletedCount === 0) {
+            return res.status(404).json({ message: 'No se encontró el estudiante.' });
+        }
+
+        res.status(200).json({ message: 'Estudiante eliminado exitosamente.' });
     } catch (error) {
-      console.error('Error al eliminar registros duplicados:', error.message);
-      res.status(500).json({ message: 'Hubo un error al eliminar los registros duplicados.' });
+        console.error('Error al eliminar estudiante:', error.message);
+        res.status(500).json({ message: 'Hubo un error al eliminar el estudiante.' });
     }
-  });
-  
+});
 
+  
 module.exports = router;
