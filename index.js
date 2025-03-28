@@ -12,6 +12,7 @@ const PORT = process.env.PORT || 3000;
 const usuarioRoute = require('./routes/usuario.route');
 const registroHijosRoute = require('./routes/registroHijos.route');
 const RegistroMaterialesEscolaresRoute = require('./routes/registroMaterialesEscolares.route');
+const registroNivelesEducativosRoute = require('./routes/registroNivelesEducativos.route');
 
 app.use(express.json()); //Habilita el manejo de JSON en las peticiones 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -28,6 +29,7 @@ mongoose.connect(process.env.MONGODB_URI,{
 app.use('/usuarios', usuarioRoute);
 app.use('/registrohijos', registroHijosRoute);
 app.use('/RegistroMaterialesEscolares', RegistroMaterialesEscolaresRoute);
+app.use('/registroNivelesEducativos', registroNivelesEducativosRoute);
 
 app.get('/', (req,res)=> {
     res.send('Servidor en funcionamiento');
