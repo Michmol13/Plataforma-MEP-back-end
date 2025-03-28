@@ -10,9 +10,9 @@ const PORT = process.env.PORT || 3000;
 
 //Importar rutas
 const usuarioRoute = require('./routes/usuario.route');
-const registroHijosRoute = require('./routes/registroHijos.route');
+const registroHijosRoute = require('./routes/registrohijos.route');
 const RegistroMaterialesEscolaresRoute = require('./routes/registroMaterialesEscolares.route');
-const registroNivelesEducativosRoute = require('./routes/registroNivelesEducativos.route');
+const registroNivelesEducativosRoute = require('./routes/registroNivelesEducativos.route')
 
 app.use(express.json()); //Habilita el manejo de JSON en las peticiones 
 app.use(bodyParser.urlencoded({extended:true}));

@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const NivelesEducativos = require('../models/NivelesEducativos.model'); 
+const registroNivelesEducativos= require('../models/registroNivelesEducativos.model'); 
 
 router.post('/', async (req, res) => {
     const { nombreNivel, descripcion, estado } = req.body;
@@ -11,10 +11,9 @@ router.post('/', async (req, res) => {
     }
 
     try {
-       
-        const NivelesEducativos = new NivelesEducativos({nombreNivel, descripcion, estado});
-        await nuevoNivelesEducativos.save();
-        res.status(201).json(nuevoNivelesEducativos);  
+        const nuevoregistroNivelesEducativos = new registroNivelesEducativos({nombreNivel, descripcion, estado});
+        await nuevoregistroNivelesEducativos.save();
+        res.status(201).json(nuevoregistroNivelesEducativos);  
     } catch (error) {
         res.status(400).json({ msj: error.message });  
     }
@@ -23,7 +22,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const nivelesEducativos = await NivelesEducativos.find();  
+        const nivelesEducativos = await registroNivelesEducativos.find();  
         res.json(nivelesEducativos);
     } catch (error) {
         res.status(500).json({ msj: error.message });  
@@ -31,34 +30,28 @@ router.get('/', async (req, res) => {
 });
 
 
-router.delete('/NivelEducativo', async (req, res) => {
+router.delete('/eliminarRegistro', async (req, res) => {
     try {
         const{ nombreNivel, descripcion, estado } = req.body
         if (!nombreNivel || !descripcion ||!estado) {
             return res.status(404).json({ msj: 'Nivel educativo no encontrado.' });
         }
-
-            const resultado = await NivelesEducativos.deleteOne({
-            nombreNivel, descripcion, estado
+            const resultado = await registroNivelesEducativos.deleteOne({
+            nombreNivel, 
+            descripcion, 
+            estado
         });
-         if (resultado.deletedCount === 0) {
-                return res.status(404).json({ msj: 'Nivel educativo no encontrado.' });
-            }
+
+        if (resultado.deletedCount === 0) {
+            return res.status(404).json({ msj: 'Nivel educativo no encontrado.' });
+        }
+
         res.status(200).json({ msj: 'Nivel educativo eliminado exitosamente.' });
         } catch (error) {
-         console.error('Error al eliminar Nivel Educativo.') 
+            console.error('Error al eliminar Nivel Educativo.') 
             res.status(500).json({ msj: 'Hubo un error al eliminar el nivel educativo.' });
         }   
-        
-
-
-
-
-
-
-
 });
-
 
 
 module.exports = router;

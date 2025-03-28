@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const schemaNivelesEducativos = new mongoose.Schema({
+const schemaregistroNivelesEducativos = new mongoose.Schema({
     nombreNivel: {
         type: String,
         required: true,
@@ -18,5 +18,5 @@ const schemaNivelesEducativos = new mongoose.Schema({
     }
 });
 
-const NivelesEducativos = mongoose.model('NivelesEducativos', schemaNivelesEducativos);
-module.exports = NivelesEducativos;
+const registroNivelesEducativos = mongoose.model('registroNivelesEducativos', schemaregistroNivelesEducativos);
+module.exports = registroNivelesEducativos;

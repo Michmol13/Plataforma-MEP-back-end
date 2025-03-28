@@ -46,9 +46,9 @@ router.delete('/eliminarRegistro', async (req, res) => {
       if (resultado.deletedCount === 0) {
           return res.status(404).json({ message: 'No se encontró el material.' });
       }
-
+      
       res.status(200).json({ message: 'Material eliminado exitosamente.' });
-  } catch (error) {
+    } catch (error) {
       console.error('Error al eliminar material:', error.message);
       res.status(500).json({ message: 'Hubo un error al eliminar el material.' });
   }
