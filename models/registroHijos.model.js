@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const schemaRegistrohijos = new mongoose.Schema({
+const schemaregistroHijos = new mongoose.Schema({
     nombrecompletoHijo:{
         type: String,
         required: true,
@@ -18,5 +18,5 @@ const schemaRegistrohijos = new mongoose.Schema({
     }
 });
 
-const Registrohijos = mongoose.model('RegistroHijos', schemaRegistrohijos);
-module.exports = Registrohijos;
+const registroHijos = mongoose.model('registroHijos', schemaregistroHijos);
+module.exports = registroHijos;
