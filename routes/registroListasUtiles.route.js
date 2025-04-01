@@ -3,14 +3,14 @@ const router = express.Router();
 const registroListasUtiles = require('../models/registroListaUtiles.model');
 
 router.post('/', async(req,res) =>{
-    const{nombrelista, nivelEducativo, fechaCreacion, estadolista} = req.body;
+    const{nombreLista, nivelEducativo, fechaCreacion, estadoLista} = req.body;
 
-    if(!nombrelista || !nivelEducativo || !fechaCreacion || !estadolista){
+    if(!nombreLista || !nivelEducativo || !fechaCreacion || !estadoLista){
         return res.status(400).json({msj : 'Todos los campos son obligatorios'})
     }
 
     try{
-        const nuevoregistroListas = new registroListas({nombrelista, nivelEducativo, fechaCreacion, estadolista});
+        const nuevoregistroListas = new registroListasUtiles({nombreLista, nivelEducativo, fechaCreacion, estadoLista});
         await nuevoregistroListas.save();
         res.status(201).json(nuevoregistroListas);
     }catch(error){
@@ -30,17 +30,17 @@ router.get('/', async(req,res) =>{
 
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
-        const { nombrelista, nivelEducativo, fechaCreacion, estadolista } = req.body;
+        const { nombreLista, nivelEducativo, fechaCreacion, estadoLista } = req.body;
 
-        if (!nombrelista || !nivelEducativo || !fechaCreacion || !estadolista) {
+        if (!nombreLista || !nivelEducativo || !fechaCreacion || !estadoLista) {
             return res.status(400).json({ message: 'Se requiere nombrelista, nivelEducativo, fechaCreacion, estadolista' });
         }
 
-        const resultado = await registroListas.deleteOne({
-            nombrelista,
+        const resultado = await registroListasUtiles.deleteOne({
+            nombreLista,
             nivelEducativo,
             fechaCreacion,
-            estadolista
+            estadoLista
         });
 
         if (resultado.deletedCount === 0) {

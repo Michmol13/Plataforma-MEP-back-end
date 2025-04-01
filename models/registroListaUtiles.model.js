@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const schemaregistroListasUtiles = new mongoose.Schema({
-    nombrelista:{
+    nombreLista:{
         type: String,
         required: true,
         unique: true
@@ -12,14 +12,14 @@ const schemaregistroListasUtiles = new mongoose.Schema({
         unique: false
     },
     fechaCreacion:{
-        type: Number,
+        type: String,
         required: true,
         unique: false
     },
-    estadolista:{
+    estadoLista:{
         type: Boolean,
-        required: true,
-        unique: false
+        required: true, 
+        default: true
     }
 });
 
