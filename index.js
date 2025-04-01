@@ -14,6 +14,8 @@ const registroHijosRoute = require('./routes/registroHijos.route');
 const registroMaterialesEscolaresRoute = require('./routes/registroMaterialesEscolares.route');
 const registroNivelesEducativosRoute = require('./routes/registroNivelesEducativos.route')
 const agregarMaterialesListaRoute = require('./routes/agregarMaterialesLista.route');
+const registroCategoriaMaterialesRoute = require('./routes/registroCategoriaMateriales.route');
+const registroListaUtilesRoute = require('./routes/registroListasUtiles.route');
 
 app.use(express.json()); //Habilita el manejo de JSON en las peticiones 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -27,11 +29,13 @@ mongoose.connect(process.env.MONGODB_URI,{
 .then(()=> console.log('MongoDB Atlas conectado'))
 .catch(error=> console.log('Ocurrio un error al conectarse con MongoDB: ', error));
 
-app.use('/registrousuarios', registroUsuarioRoute);
+app.use('/registroUsuarios', registroUsuarioRoute);
 app.use('/registroHijos', registroHijosRoute);
-app.use('/RegistroMaterialesEscolares', registroMaterialesEscolaresRoute);
+app.use('/registroCategoria', registroCategoriaMaterialesRoute);
+app.use('/registroMaterialesEscolares', registroMaterialesEscolaresRoute);
 app.use('/registroNivelesEducativos', registroNivelesEducativosRoute);
-app.use('/Material', agregarMaterialesListaRoute);
+app.use('/Materiales', agregarMaterialesListaRoute);
+app.use('/registroListasUtiles', registroListaUtilesRoute);
 
 app.get('/', (req,res)=> {
     res.send('Servidor en funcionamiento');

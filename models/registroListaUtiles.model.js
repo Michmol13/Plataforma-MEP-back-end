@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const schemaregistroListas = new mongoose.Schema({
+const schemaregistroListasUtiles = new mongoose.Schema({
     nombrelista:{
         type: String,
         required: true,
@@ -11,7 +11,7 @@ const schemaregistroListas = new mongoose.Schema({
         required: true,
         unique: false
     },
-    annoCreacion:{
+    fechaCreacion:{
         type: Number,
         required: true,
         unique: false
@@ -23,5 +23,5 @@ const schemaregistroListas = new mongoose.Schema({
     }
 });
 
-const registroHijos = mongoose.model('registroListas', schemaregistroListas);
-module.exports = registroListas;
+const registroListasUtiles = mongoose.model('registroListasUtiles', schemaregistroListasUtiles);
+module.exports = registroListasUtiles;

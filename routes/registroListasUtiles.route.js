@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const registroListas = require('../models/registroListas.model');
+const registroListasUtiles = require('../models/registroListaUtiles.model');
 
 router.post('/', async(req,res) =>{
-    const{nombrelista, nivelEducativo, annoCreacion, estadolista} = req.body;
+    const{nombrelista, nivelEducativo, fechaCreacion, estadolista} = req.body;
 
-    if(!nombrelista || !nivelEducativo || !annoCreacion || !estadolista){
+    if(!nombrelista || !nivelEducativo || !fechaCreacion || !estadolista){
         return res.status(400).json({msj : 'Todos los campos son obligatorios'})
     }
 
     try{
-        const nuevoregistroListas = new registroListas({nombrelista, nivelEducativo, annoCreacion, estadolista});
+        const nuevoregistroListas = new registroListas({nombrelista, nivelEducativo, fechaCreacion, estadolista});
         await nuevoregistroListas.save();
         res.status(201).json(nuevoregistroListas);
     }catch(error){
@@ -20,7 +20,7 @@ router.post('/', async(req,res) =>{
 
 router.get('/', async(req,res) =>{
     try{
-        const registro = await registroListas.find();
+        const registro = await registroListasUtiles.find();
         res.json(registro);
     }catch(error){
         res.status(500).json({msj: error.message})
@@ -30,16 +30,16 @@ router.get('/', async(req,res) =>{
 
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
-        const { nombrelista, nivelEducativo, annoCreacion, estado } = req.body;
+        const { nombrelista, nivelEducativo, fechaCreacion, estadolista } = req.body;
 
-        if (!nombrelista || !nivelEducativo || !annoCreacion || !estadolista) {
-            return res.status(400).json({ message: 'Se requiere nombrelista, nivelEducativo, annoCreacion, estado' });
+        if (!nombrelista || !nivelEducativo || !fechaCreacion || !estadolista) {
+            return res.status(400).json({ message: 'Se requiere nombrelista, nivelEducativo, fechaCreacion, estadolista' });
         }
 
         const resultado = await registroListas.deleteOne({
             nombrelista,
             nivelEducativo,
-            annoCreacion,
+            fechaCreacion,
             estadolista
         });
 
@@ -55,4 +55,4 @@ router.delete('/eliminarRegistro', async (req, res) => {
 });
 
 
-module.exports = router;
+module.exports = router;

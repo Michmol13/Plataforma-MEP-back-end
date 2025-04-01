@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Categoria = require('../models/model');
+const registroCategoria = require('../models/registrocategoriaMateriales.model');
 
 
 router.post('/', async (req, res) => {
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const categorias = await Categoria.find();
+        const categorias = await registroCategoria.find();
         res.json(categorias);
     } catch (error) {
         res.status(500).json({ message: error.message });

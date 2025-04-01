@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const MaterialSchema = new Schema({
+const MaterialesSchema = new Schema({
     cantidad: {
         type: Number,
         required: true
@@ -13,4 +13,4 @@ const MaterialSchema = new Schema({
 
 });
 
-module.exports = mongoose.model('Material', MaterialSchema);
+module.exports = mongoose.model('Materiales', MaterialesSchema);

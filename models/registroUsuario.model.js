@@ -1,13 +1,11 @@
 const mongoose = require('mongoose');
 
-const UsuariosuarioSchema = new mongoose.Schema({
+const UsuarioSchema = new mongoose.Schema({
     
     nombre:{
         type:String,
         require: true, 
         unique: false
-
-
     },
     cedula: {
         type: String,
@@ -47,6 +45,6 @@ const UsuariosuarioSchema = new mongoose.Schema({
     }
 });
 
-const Usuario = mongoose.model('Usuario', usuarioSchema);
+const Usuario = mongoose.model('registroUsuarios', UsuarioSchema);
 
 module.exports = Usuario;
