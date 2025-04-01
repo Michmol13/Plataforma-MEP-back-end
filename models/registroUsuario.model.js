@@ -25,3 +25,4 @@ const schemaregistroUsuario = new mongoose.Schema({
 
 const registroUsuario = mongoose.model('registroUsuario', schemaregistroUsuario);
 module.exports = registroUsuario;
+
