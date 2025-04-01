@@ -3,14 +3,14 @@ const router = express.Router();
 const registroUsuario = require('../models/registroUsuario.model');
 
 router.post('/', async(req,res) =>{
-    const{correo, cedula, nombre, contrasena} = req.body;
+    const{nombreCompleto, cedula, correoElectronico, contrasena, confirmarContrasena, rol, estadoCuenta} = req.body;
 
     if(!nombreCompleto || !cedula || !correoElectronico || !contrasena|| !confirmarContrasena|| !rol|| !estadoCuenta){
         return res.status(400).json({msj : 'Todos los campos son obligatorios'})
     }
 
     try{
-        const nuevoUsuario = new registroUsuario(nombreCompleto, cedula, correoElectronico, contrasena, confirmarContrasena,rol,estadoCuenta);
+        const nuevoUsuario = new registroUsuario({nombreCompleto, cedula, correoElectronico, contrasena, confirmarContrasena,rol,estadoCuenta});
         await nuevoUsuario.save();
         res.status(201).json(nuevoUsuario);
     }catch(error){

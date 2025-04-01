@@ -1,10 +1,9 @@
 const mongoose = require('mongoose');
 
 const UsuarioSchema = new mongoose.Schema({
-    
-    nombre:{
-        type:String,
-        require: true, 
+    nombreCompleto:{
+        type: String,
+        required: true, 
         unique: false
     },
     cedula: {
@@ -46,5 +45,4 @@ const UsuarioSchema = new mongoose.Schema({
 });
 
 const Usuario = mongoose.model('registroUsuarios', UsuarioSchema);
-
 module.exports = Usuario;

@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const registroCategoria = require('../models/registrocategoriaMateriales.model');
+const registroCategoriaMateriales = require('../models/registrocategoriaMateriales.model');
 
 
 router.post('/', async (req, res) => {
     try {
-        const nuevaCategoria = new Categoria(req.body);
+        const nuevaCategoria = new registroCategoriaMateriales(req.body);
         await nuevaCategoria.save();
         res.status(201).json(nuevaCategoria);
     } catch (error) {
@@ -16,7 +16,7 @@ router.post('/', async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        const categorias = await registroCategoria.find();
+        const categorias = await registroCategoriaMateriales.find();
         res.json(categorias);
     } catch (error) {
         res.status(500).json({ message: error.message });
