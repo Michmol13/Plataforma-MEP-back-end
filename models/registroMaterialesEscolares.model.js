@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const schemaRegistroMaterialesEscolares = new mongoose.Schema({
     nombreMaterial:{
@@ -24,7 +25,15 @@ const schemaRegistroMaterialesEscolares = new mongoose.Schema({
     estado:{
     type: Boolean,
     unique: false
-}
+    },
+    cantidad:[
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'Material'
+        }
+    ]
+    
+
 });
 
 const RegistroMaterialesEscolares = mongoose.model('RegistroMaterialesEscolares', schemaRegistroMaterialesEscolares);

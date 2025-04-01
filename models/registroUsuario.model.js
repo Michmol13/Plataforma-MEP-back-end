@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const schemaUsuario = new mongoose.Schema({
+const schemaregistroUsuario = new mongoose.Schema({
     correo:{
         type: String,
         required: true,
@@ -23,5 +23,5 @@ const schemaUsuario = new mongoose.Schema({
     }
 });
 
-const Usuario = mongoose.model('Usuario', schemaUsuario);
-module.exports = Usuario;
+const registroUsuario = mongoose.model('registroUsuario', schemaregistroUsuario);
+module.exports = registroUsuario;
