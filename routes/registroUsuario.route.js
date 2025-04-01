@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Usuario = require('../models/usuario.model');
+const registroUsuario = require('../models/registroUsuario.model');
 
 router.post('/', async(req,res) =>{
     const{correo, cedula, nombre, contrasena} = req.body;
@@ -10,7 +10,7 @@ router.post('/', async(req,res) =>{
     }
 
     try{
-        const nuevoUsuario = new Usuario({correo, cedula, nombre, contrasena});
+        const nuevoUsuario = new registroUsuario({correo, cedula, nombre, contrasena});
         await nuevoUsuario.save();
         res.status(201).json(nuevoUsuario);
     }catch(error){
@@ -20,7 +20,7 @@ router.post('/', async(req,res) =>{
 
 router.get('/', async(req,res) =>{
     try{
-        const usuarios = await Usuario.find();
+        const usuarios = await registroUsuario.find();
         res.json(usuarios);
     }catch(error){
         res.status(500).json({msj: error.message})
