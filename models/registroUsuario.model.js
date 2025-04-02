@@ -16,7 +16,6 @@ const UsuarioSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        match: [/.+@.+\..+/, "Correo electrónico inválido"] // Valida formato de email
     },
     contrasena: {
         type: String,

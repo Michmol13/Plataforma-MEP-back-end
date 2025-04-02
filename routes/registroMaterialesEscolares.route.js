@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const registroMaterialesEscolares = require('../models/registroMaterialesEscolares.model');
-const Material = require('../models/agregarMaterial.model');
+const Materiales = require('../models/agregarMaterialesLista.model');
 
 
 router.post('/', async(req,res) =>{
@@ -66,7 +66,7 @@ router.put('/agregar-materiales', async (req, res) => {
 
     try {
 
-        const material = await Material.findById(MaterialId);
+        const material = await Materiales.findById(MaterialId);
 
         if(!material){
             return res.status(404).json({msj: 'Material no encontrado'});
