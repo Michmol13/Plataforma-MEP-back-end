@@ -1,20 +1,20 @@
 const express = require('express');
 const router = express.Router();
-const RegistroMaterialesEscolares = require('../models/registroMaterialesEscolares.model');
-const Material = require('../models/agregarMaterialesLista.model');
+const registroMaterialesEscolares = require('../models/registroMaterialesEscolares.model');
+const Material = require('../models/agregarMaterial.model');
 
 
 router.post('/', async(req,res) =>{
-    const{nombreMaterial, descripcion, categoria, unidadMedida, estado} = req.body;
+    const{nombreMaterial, descripcion, categoria, unidadMedida, estado, cantidad} = req.body;
 
-    if(!nombreMaterial ||!descripcion ||!categoria || !unidadMedida || !estado){
+    if(!nombreMaterial ||!descripcion ||!categoria || !unidadMedida || !estado || !cantidad){
         return res.status(400).json({msj : 'Todos los campos son obligatorios'})
     }
 
     try{
-        const nuevoRegistroMaterialesEscolares = new RegistroMaterialesEscolares ({nombreMaterial, descripcion, categoria, unidadMedida, estado});
-        await nuevoRegistroMaterialesEscolares.save();
-        res.status(201).json(nuevoRegistroMaterialesEscolares);
+        const nuevoregistroMaterialesEscolares = new registroMaterialesEscolares ({nombreMaterial, descripcion, categoria, unidadMedida, estado});
+        await nuevoregistroMaterialesEscolares.save();
+        res.status(201).json(nuevoregistroMaterialesEscolares);
     }catch(error){
         res.status(400).json({msj: error.message})
     }
@@ -22,7 +22,7 @@ router.post('/', async(req,res) =>{
 
 router.get('/', async (req, res) => {
     try {
-        const materiales = await RegistroMaterialesEscolares.find();
+        const materiales = await registroMaterialesEscolares.find();
         res.json(materiales);
     } catch (error) {
         res.status(500).json({ msj: error.message });
@@ -31,18 +31,19 @@ router.get('/', async (req, res) => {
 
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
-        const { nombreMaterial, descripcion, categoria, unidadMedida, estado  } = req.body;
+        const { nombreMaterial, descripcion, categoria, unidadMedida, estado, cantidad  } = req.body;
 
-        if (!nombreMaterial || !descripcion || !categoria || !unidadMedida || !estado ) {
-            return res.status(400).json({ message: 'Se requiere nombreMaterial, descripcion, categoria, unidadMedida y estado .' });
+        if (!nombreMaterial || !descripcion || !categoria || !unidadMedida || !estado || !cantidad ) {
+            return res.status(400).json({ message: 'Se requiere nombreMaterial, descripcion, categoria, unidadMedida, estado y cantidad.' });
         }
 
-    const resultado = await RegistroMaterialesEscolares.deleteOne({
+    const resultado = await registroMaterialesEscolares.deleteOne({
         nombreMaterial,
         descripcion,
         categoria,
         unidadMedida,
-        estado
+        estado,
+        cantidad
     });
 
     if (resultado.deletedCount === 0) {
@@ -71,7 +72,7 @@ router.put('/agregar-materiales', async (req, res) => {
             return res.status(404).json({msj: 'Material no encontrado'});
         }
 
-        const registroMaterialesEscolares = await RegistroMaterialesEscolares.findOne({nombreMaterial});
+        const registroMaterialesEscolares = await registroMaterialesEscolares.findOne({nombreMaterial});
         if(!registroMaterialesEscolares){
             return res.status(404).json({msj: 'Registro de material no encontrado'});
         }
