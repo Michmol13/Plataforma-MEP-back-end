@@ -39,7 +39,8 @@ const UsuarioSchema = new mongoose.Schema({
     },
     estadoCuenta: {
         type: Boolean,
-        default: true // Activo/Inactivo (true = Activo, false = Inactivo)
+        required: true, 
+        default: true 
     }
 });
 

@@ -3,9 +3,9 @@ const router = express.Router();
 const registroUsuario = require('../models/registroUsuario.model');
 
 router.post('/', async (req, res) => {
-    let { nombreCompleto, cedula, correoElectronico, contrasena, confirmarContrasena, rol, estadoCuenta } = req.body;
+    const { nombreCompleto, cedula, correoElectronico, contrasena, confirmarContrasena, rol, estadoCuenta } = req.body;
 
-    if (!nombreCompleto?.trim() || !cedula?.trim() || !correoElectronico?.trim() || !contrasena || !confirmarContrasena || !rol || typeof estadoCuenta === 'undefined') {
+    if (!nombreCompleto || !cedula || !correoElectronico || !contrasena || !confirmarContrasena || !rol || !estadoCuenta){
         return res.status(400).json({ msj: 'Todos los campos obligatorios deben ser llenados.' });
     }
 
