@@ -1,13 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const registroMaterialesEscolares = require('../models/registroMaterialesEscolares.model');
-const Materiales = require('../models/agregarMaterialesLista.model');
+/*const Materiales = require('../models/agregarMaterialesLista.model');*/
 
 
 router.post('/', async(req,res) =>{
-    const{nombreMaterial, descripcion, categoria, unidadMedida, estado, cantidad} = req.body;
+    const{nombreMaterial, descripcion, categoria, unidadMedida, estado} = req.body;
 
-    if(!nombreMaterial ||!descripcion ||!categoria || !unidadMedida || !estado || !cantidad){
+    if(!nombreMaterial ||!descripcion ||!categoria || !unidadMedida || !estado){
         return res.status(400).json({msj : 'Todos los campos son obligatorios'})
     }
 
@@ -31,10 +31,10 @@ router.get('/', async (req, res) => {
 
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
-        const { nombreMaterial, descripcion, categoria, unidadMedida, estado, cantidad  } = req.body;
+        const { nombreMaterial, descripcion, categoria, unidadMedida, estado  } = req.body;
 
-        if (!nombreMaterial || !descripcion || !categoria || !unidadMedida || !estado || !cantidad ) {
-            return res.status(400).json({ message: 'Se requiere nombreMaterial, descripcion, categoria, unidadMedida, estado y cantidad.' });
+        if (!nombreMaterial || !descripcion || !categoria || !unidadMedida ||!estado  ) {
+            return res.status(400).json({ message: 'Se requiere nombreMaterial, descripcion, categoria, unidadMedida, estado.' });
         }
 
     const resultado = await registroMaterialesEscolares.deleteOne({
@@ -42,8 +42,8 @@ router.delete('/eliminarRegistro', async (req, res) => {
         descripcion,
         categoria,
         unidadMedida,
-        estado,
-        cantidad
+        estado
+        
     });
 
     if (resultado.deletedCount === 0) {
@@ -57,7 +57,7 @@ router.delete('/eliminarRegistro', async (req, res) => {
     }
 });  
 
-router.put('/agregar-materiales', async (req, res) => {
+/*router.put('/agregar-materiales', async (req, res) => {
     const {nombreMaterial, MaterialId} = req.body;
 
     if(!nombreMaterial || !MaterialId) {
@@ -87,6 +87,6 @@ router.put('/agregar-materiales', async (req, res) => {
     } catch(error){
         res.status(500).json({msj: 'Error al agregar cantidad', error: error.message});
     }
-})
+})*/
 
 module.exports = router;

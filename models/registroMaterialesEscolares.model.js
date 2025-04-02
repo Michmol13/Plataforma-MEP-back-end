@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const schemaRegistroMaterialesEscolares = new mongoose.Schema({
+const schemaregistroMaterialesEscolares = new mongoose.Schema({
     nombreMaterial:{
         type: String,
         required: true,
@@ -22,19 +22,19 @@ const schemaRegistroMaterialesEscolares = new mongoose.Schema({
         required: true,
         unique: false
     },
-    estado:{
-    type: Boolean,
-    unique: false
-    },
-    cantidad:[
+    /*cantidad:[
         {
             type: Schema.Types.ObjectId,
             ref: 'Material'
         }
-    ]
-    
+    ],*/
+    estado:{
+        type: Boolean,
+        required: true, 
+        default: true 
+    }   
 
 });
 
-const RegistroMaterialesEscolares = mongoose.model('RegistroMaterialesEscolares', schemaRegistroMaterialesEscolares);
-module.exports = RegistroMaterialesEscolares;
+const registroMaterialesEscolares = mongoose.model('registroMaterialesEscolares', schemaregistroMaterialesEscolares);
+module.exports = registroMaterialesEscolares;
