@@ -10,6 +10,7 @@ const SchemaregistroUsuarios = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
+        match: [/^\d{1}-\d{3,4}-\d{3,5}$/, "Formato de cédula inválido"] // Formato: 1-2345-6789
     },
     correoElectronico: {
         type: String,
