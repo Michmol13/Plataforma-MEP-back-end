@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const UsuarioSchema = new mongoose.Schema({
+const SchemaregistroUsuarios = new mongoose.Schema({
     nombreCompleto:{
         type: String,
         required: true, 
@@ -10,7 +10,6 @@ const UsuarioSchema = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        match: [/^\d{1}-\d{4}-\d{4}$/, "Formato de cédula inválido"] // Valida el formato X-XXXX-XXXX
     },
     correoElectronico: {
         type: String,
@@ -44,5 +43,5 @@ const UsuarioSchema = new mongoose.Schema({
     }
 });
 
-const Usuario = mongoose.model('registroUsuarios', UsuarioSchema);
-module.exports = Usuario;
+const registroUsuarios = mongoose.model('registroUsuarios', SchemaregistroUsuarios);
+module.exports = registroUsuarios;

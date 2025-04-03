@@ -5,16 +5,29 @@ const registroUsuario = require('../models/registroUsuario.model');
 router.post('/', async (req, res) => {
     const { nombreCompleto, cedula, correoElectronico, contrasena, confirmarContrasena, rol, estadoCuenta } = req.body;
 
-    if (!nombreCompleto || !cedula || !correoElectronico || !contrasena || !confirmarContrasena || !rol || !estadoCuenta){
+    if (!nombreCompleto || !cedula || !correoElectronico || !contrasena || !confirmarContrasena || !rol || !estadoCuenta) {
         return res.status(400).json({ msj: 'Todos los campos obligatorios deben ser llenados.' });
     }
 
+    if (contrasena !== confirmarContrasena) {
+        return res.status(400).json({ msj: 'Las contraseñas no coinciden' });
+    }
+
     try {
-        const nuevousuario = new registroUsuario({ nombreCompleto, cedula, correoElectronico, contrasena, confirmarContrasena, rol, estadoCuenta });
+        const nuevousuario = new registroUsuario({
+            nombreCompleto,
+            cedula,
+            correoElectronico,
+            contrasena,
+            confirmarContrasena,
+            rol,
+            estadoCuenta
+        });
         await nuevousuario.save();
         res.status(201).json(nuevousuario);
     } catch (error) {
-        res.status(400).json({ msj: error.message });
+        console.error(error);
+        res.status(500).json({ msj: 'Ocurrió un error al registrar al usuario.', error: error.message });
     }
 });
     
