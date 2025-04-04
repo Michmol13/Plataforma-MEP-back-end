@@ -4,7 +4,7 @@ const schemaregistroListasUtiles = new mongoose.Schema({
     nombreLista:{
         type: String,
         required: true,
-        unique: true
+        unique: false,
     },
     nivelEducativo:{
         type: String,
