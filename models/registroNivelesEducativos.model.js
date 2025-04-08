@@ -4,7 +4,7 @@ const schemaregistroNivelesEducativos = new mongoose.Schema({
     nombreNivel: {
         type: String,
         required: true,
-        unique: true 
+        unique: false 
     },
     descripcion: {
         type: String,
