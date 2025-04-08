@@ -31,7 +31,7 @@ router.get('/', async (req, res) => {
 
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
-        const { nombreMaterial  } = req.body;
+        const { nombreMaterial } = req.body;
 
         if (!nombreMaterial) {
             return res.status(400).json({ message: 'Se requiere nombreMaterial' });
