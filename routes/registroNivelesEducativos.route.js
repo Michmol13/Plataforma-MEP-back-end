@@ -32,14 +32,12 @@ router.get('/', async (req, res) => {
 
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
-        const{ nombreNivel, descripcion, estado } = req.body
-        if (!nombreNivel || !descripcion ||!estado) {
-            return res.status(404).json({ msj: 'Nivel educativo no encontrado.' });
+        const{ nombreNivel } = req.body
+        if (!nombreNivel) {
+            return res.status(404).json({ msj: 'Se requiere el nombre del nivel educativo' });
         }
             const resultado = await registroNivelesEducativos.deleteOne({
             nombreNivel, 
-            descripcion, 
-            estado
         });
 
         if (resultado.deletedCount === 0) {

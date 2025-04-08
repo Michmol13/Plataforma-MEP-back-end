@@ -30,17 +30,14 @@ router.get('/', async(req,res) =>{
 
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
-        const { nombreLista, nivelEducativo, fechaCreacion, estadoLista } = req.body;
+        const { nombreLista } = req.body;
 
-        if (!nombreLista || !nivelEducativo || !fechaCreacion || !estadoLista) {
-            return res.status(400).json({ message: 'Se requiere nombrelista, nivelEducativo, fechaCreacion, estadolista' });
+        if (!nombreLista) {
+            return res.status(400).json({ message: 'Se requiere nombrelista' });
         }
 
         const resultado = await registroListasUtiles.deleteOne({
             nombreLista,
-            nivelEducativo,
-            fechaCreacion,
-            estadoLista
         });
 
         if (resultado.deletedCount === 0) {

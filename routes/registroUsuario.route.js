@@ -42,20 +42,14 @@ router.get('/', async(req,res) =>{
 
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
-        const { nombreCompleto, cedula, correoElectronico, contrasena, confirmarContrasena, rol, estadoCuenta } = req.body;
+        const { cedula } = req.body;
 
-        if (!nombreCompleto || !cedula || !correoElectronico || !contrasena || !confirmarContrasena || !rol || !estadoCuenta) {
-            return res.status(400).json({ message: 'Se requiere mas datos' });
+        if (!cedula) {
+            return res.status(400).json({ message: 'Se requiere la cedula del usuario' });
         }
 
         const resultado = await registroUsuario.deleteOne({
-            nombreCompleto,
-            cedula,
-            correoElectronico,
-            contrasena,
-            confirmarContrasena,
-            rol,
-            estadoCuenta
+            cedula
         });
 
         if (resultado.deletedCount === 0) {

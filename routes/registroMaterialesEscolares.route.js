@@ -31,19 +31,14 @@ router.get('/', async (req, res) => {
 
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
-        const { nombreMaterial, descripcion, categoria, unidadMedida, estado  } = req.body;
+        const { nombreMaterial  } = req.body;
 
-        if (!nombreMaterial || !descripcion || !categoria || !unidadMedida ||!estado  ) {
-            return res.status(400).json({ message: 'Se requiere nombreMaterial, descripcion, categoria, unidadMedida, estado.' });
+        if (!nombreMaterial) {
+            return res.status(400).json({ message: 'Se requiere nombreMaterial' });
         }
 
     const resultado = await registroMaterialesEscolares.deleteOne({
         nombreMaterial,
-        descripcion,
-        categoria,
-        unidadMedida,
-        estado
-        
     });
 
     if (resultado.deletedCount === 0) {
