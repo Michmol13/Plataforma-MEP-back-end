@@ -3,14 +3,14 @@ const router = express.Router();
 const registroHijos = require('../models/registroHijos.model');
 
 router.post('/', async(req,res) =>{
-    const{nombrecompletoHijo, nivelEducativo, annoLectivo} = req.body;
+    const{nombrecompletoHijo, cedula, nivelEducativo, annoLectivo} = req.body;
 
-    if(!nombrecompletoHijo || !nivelEducativo || !annoLectivo){
+    if(!nombrecompletoHijo  || !cedula || !nivelEducativo || !annoLectivo){
         return res.status(400).json({msj : 'Todos los campos son obligatorios'})
     }
 
     try{
-        const nuevoregistroHijos = new registroHijos({nombrecompletoHijo, nivelEducativo, annoLectivo});
+        const nuevoregistroHijos = new registroHijos({nombrecompletoHijo, cedula, nivelEducativo, annoLectivo});
         await nuevoregistroHijos.save();
         res.status(201).json(nuevoregistroHijos);
     }catch(error){
@@ -30,14 +30,14 @@ router.get('/', async(req,res) =>{
 
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
-        const { nombrecompletoHijo } = req.body;
+        const { cedula } = req.body;
 
-        if (!nombrecompletoHijo) {
-            return res.status(400).json({ message: 'Se requiere nombre completo del Hijo' });
+        if (!cedula) {
+            return res.status(400).json({ message: 'Se requiere la cedula de su hijo' });
         }
 
         const resultado = await registroHijos.deleteOne({
-            nombrecompletoHijo
+            cedula,
         });
 
         if (resultado.deletedCount === 0) {
