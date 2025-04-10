@@ -29,7 +29,6 @@ router.get('/', async (req, res) => {
     }
 });
 
-
 router.delete('/eliminarRegistro', async (req, res) => {
     try {
         const{ descripcion } = req.body

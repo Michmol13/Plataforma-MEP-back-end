@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const schemaregistroHijos = new mongoose.Schema({
     nombrecompletoHijo:{
@@ -12,11 +13,13 @@ const schemaregistroHijos = new mongoose.Schema({
         required: true,
         match: [/^\d{1}-\d{3,4}-\d{3,5}$/, "Formato de cédula inválido"] 
     },
-    nivelEducativo:{
-        type: String,
-        required: true,
-        unique: false
-    },
+    nivelEducativo: [
+        {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'registroNivelesEducativos', 
+        required: true
+        }
+    ],
     annoLectivo:{
         type: Number,
         required: true,
