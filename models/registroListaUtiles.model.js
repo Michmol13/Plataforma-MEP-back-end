@@ -24,18 +24,20 @@ const schemaregistroListasUtiles = new mongoose.Schema({
     },
     materiales: [
         {
-            type: Schema.Types.ObjectId,
-            ref: 'registroMaterialesEscolares'
-        },
-    ],
-    cantidad: {
-        type: Number,
-        required: false
-    },
-    observaciones: {
-        type: String,
-        required: false
-    }
+            material: {
+                type: Schema.Types.ObjectId,
+                ref: 'registroMaterialesEscolares'
+            },
+            cantidad: {
+                type: Number,
+                required: false
+            },
+            observaciones: {
+                type: String,
+                required: false
+            }
+        }
+    ]
 });
 
 const registroListasUtiles = mongoose.model('registroListasUtiles', schemaregistroListasUtiles);

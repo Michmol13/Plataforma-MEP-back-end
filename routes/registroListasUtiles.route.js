@@ -57,7 +57,7 @@ router.put('/agregar-material', async (req, res) => {
     const {nombreLista, registroMaterialesEscolaresId} = req.body;
 
     if(!nombreLista || !registroMaterialesEscolaresId) {
-        return res.status(400).json({msj: 'Nombre material y ID son obligatorios'});
+        return res.status(400).json({msj: 'Nombre lista y ID son obligatorios'});
     }
 
     try {
