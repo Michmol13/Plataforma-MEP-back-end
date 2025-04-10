@@ -13,7 +13,6 @@ const registroUsuarioRoute = require('./routes/registroUsuario.route');
 const registroHijosRoute = require('./routes/registroHijos.route');
 const registroMaterialesEscolaresRoute = require('./routes/registroMaterialesEscolares.route');
 const registroNivelesEducativosRoute = require('./routes/registroNivelesEducativos.route')
-const agregarMaterialesListaRoute = require('./routes/agregarMaterialesLista.route');
 const registroCategoriaMaterialesRoute = require('./routes/registroCategoriaMateriales.route');
 const registroListaUtilesRoute = require('./routes/registroListasUtiles.route');
 
@@ -34,7 +33,6 @@ app.use('/registroHijos', registroHijosRoute);
 app.use('/registroCategoria', registroCategoriaMaterialesRoute);
 app.use('/registroMaterialesEscolares', registroMaterialesEscolaresRoute);
 app.use('/registroNivelesEducativos', registroNivelesEducativosRoute);
-app.use('/Materiales', agregarMaterialesListaRoute);
 app.use('/registroListasUtiles', registroListaUtilesRoute);
 
 app.get('/', (req,res)=> {

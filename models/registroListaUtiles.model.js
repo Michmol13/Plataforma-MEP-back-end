@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
 const schemaregistroListasUtiles = new mongoose.Schema({
     nombreLista:{
@@ -20,6 +21,20 @@ const schemaregistroListasUtiles = new mongoose.Schema({
         type: Boolean,
         required: true, 
         default: true
+    },
+    materiales: [
+        {
+            type: Schema.Types.ObjectId,
+            ref: 'registroMaterialesEscolares'
+        },
+    ],
+    cantidad: {
+        type: Number,
+        required: false
+    },
+    observaciones: {
+        type: String,
+        required: false
     }
 });
 

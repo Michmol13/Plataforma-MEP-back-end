@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
+
 const schemaregistroMaterialesEscolares = new mongoose.Schema({
     nombreMaterial:{
         type: String,
@@ -22,12 +23,6 @@ const schemaregistroMaterialesEscolares = new mongoose.Schema({
         required: true,
         unique: false
     },
-    /*cantidad:[
-        {
-            type: Schema.Types.ObjectId,
-            ref: 'Material'
-        }
-    ],*/
     estado:{
         type: Boolean,
         required: true, 

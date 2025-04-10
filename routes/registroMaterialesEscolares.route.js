@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const registroMaterialesEscolares = require('../models/registroMaterialesEscolares.model');
-/*const Materiales = require('../models/agregarMaterialesLista.model');*/
 
 
 router.post('/', async(req,res) =>{
@@ -50,38 +49,6 @@ router.delete('/eliminarRegistro', async (req, res) => {
         console.error('Error al eliminar material:', error.message);
         res.status(500).json({ message: 'Hubo un error al eliminar el material.' });
     }
-});  
-
-/*router.put('/agregar-materiales', async (req, res) => {
-    const {nombreMaterial, MaterialId} = req.body;
-
-    if(!nombreMaterial || !MaterialId) {
-        return res.status(400).json({msj: 'Nombre material y ID son obligatorios'});
-    }
-
-    try {
-
-        const material = await Materiales.findById(MaterialId);
-
-        if(!material){
-            return res.status(404).json({msj: 'Material no encontrado'});
-        }
-
-        const registroMaterialesEscolares = await registroMaterialesEscolares.findOne({nombreMaterial});
-        if(!registroMaterialesEscolares){
-            return res.status(404).json({msj: 'Registro de material no encontrado'});
-        }
-        
-        if (!registroMaterialesEscolares.cantidad.includes(MaterialId)) {
-            registroMaterialesEscolares.cantidad.push(MaterialId);
-            await registroMaterialesEscolares.save();
-        }
-
-        res.status(200).json({msj: 'Cantidad agregada al material'});
-
-    } catch(error){
-        res.status(500).json({msj: 'Error al agregar cantidad', error: error.message});
-    }
-})*/
+});
 
 module.exports = router;
