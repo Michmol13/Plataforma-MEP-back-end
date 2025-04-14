@@ -32,7 +32,7 @@ const schemaregistroListasUtiles = new mongoose.Schema({
             },
             cantidad: {
                 type: Number,
-                required: false
+                required: true
             },
             observaciones: {
                 type: String,

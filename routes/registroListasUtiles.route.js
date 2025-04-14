@@ -1,4 +1,5 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const router = express.Router();
 const registroListasUtiles = require('../models/registroListaUtiles.model');
 
@@ -82,33 +83,45 @@ router.delete('/eliminarRegistro', async (req, res) => {
 const registroMaterialesEscolares = require('../models/registroMaterialesEscolares.model');
 
 router.put('/agregar-material', async (req, res) => {
-    const {nombreLista, registroMaterialesEscolaresId} = req.body;
+    const { nombreLista, registroMaterialesEscolaresId, cantidad, observaciones } = req.body;
 
-    if(!nombreLista || !registroMaterialesEscolaresId) {
-        return res.status(400).json({msj: 'Nombre lista y ID son obligatorios'});
+    if (!nombreLista || !registroMaterialesEscolaresId || !cantidad) {
+        return res.status(400).json({ msj: 'Nombre de la lista, ID del material y cantidad son obligatorios' });
     }
 
     try {
-
         const material = await registroMaterialesEscolares.findById(registroMaterialesEscolaresId);
-
-        if(!material){
-            return res.status(404).json({msj: 'Material no encontrado'});
+        if (!material) {
+            return res.status(404).json({ msj: 'Material no encontrado' });
         }
 
-        const listaUtiles = await registroListasUtiles.findOne({nombreLista});
-        if(!listaUtiles){
-            return res.status(404).json({msj: 'Registro de lista no encontrado'});
+        const listaUtiles = await registroListasUtiles.findOne({ nombreLista });
+        if (!listaUtiles) {
+            return res.status(404).json({ msj: 'Registro de lista no encontrado' });
         }
-        
-        if (!listaUtiles.materiales.includes(registroMaterialesEscolaresId)) {
-            listaUtiles.materiales.push(registroMaterialesEscolaresId);
+
+        listaUtiles.materiales = listaUtiles.materiales.filter(m => m.material && m.cantidad != null);
+
+        const registroMaterialesEscolaresIdObj = new mongoose.Types.ObjectId(registroMaterialesEscolaresId);
+
+        const yaExiste = listaUtiles.materiales.some(m =>
+            m.material && m.material.toString() === registroMaterialesEscolaresIdObj.toString()
+        );
+
+        if (!yaExiste) {
+            listaUtiles.materiales.push({
+                material: registroMaterialesEscolaresIdObj,
+                cantidad: cantidad,
+                observaciones: observaciones || ''
+            });
             await listaUtiles.save();
+            res.status(200).json({ msj: 'Material agregado a la lista' });
+        } else {
+            res.status(400).json({ msj: 'El material ya está agregado en la lista' });
         }
-        res.status(200).json({msj: 'Material agregado a la lista'});
 
-    } catch(error){
-        res.status(500).json({msj: 'Error al agregar material', error: error.message});
+    } catch (error) {
+        res.status(500).json({ msj: 'Error al agregar material', error: error.message });
     }
 });
 
