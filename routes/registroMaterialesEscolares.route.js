@@ -21,7 +21,7 @@ router.post('/', async(req,res) =>{
 
 router.get('/', async (req, res) => {
     try {
-        const materiales = await registroMaterialesEscolares.find();
+        const materiales = await registroMaterialesEscolares.find() .populate('categoria');
         res.json(materiales);
     } catch (error) {
         res.status(500).json({ msj: error.message });

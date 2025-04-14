@@ -13,13 +13,12 @@ const schemaregistroMaterialesEscolares = new mongoose.Schema({
         required: true,
         unique: false
     },
-    categoria:[                     
+    categoria:           
         {
             type:mongoose.Schema.Types.ObjectId,
             ref: 'registroCategoria',
             required: true,
-        }
-    ],
+        },
     unidadMedida:{
         type: String,
         required: true,

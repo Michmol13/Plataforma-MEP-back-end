@@ -20,7 +20,7 @@ router.post('/', async(req,res) =>{
 
 router.get('/', async(req,res) =>{
     try{
-        const registro = await registroListasUtiles.find();
+        const registro = await registroListasUtiles.find() .populate('nivelEducativo');
         res.json(registro);
     }catch(error){
         res.status(500).json({msj: error.message})

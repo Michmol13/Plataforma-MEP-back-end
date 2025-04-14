@@ -13,13 +13,12 @@ const schemaregistroHijos = new mongoose.Schema({
         required: true,
         match: [/^\d{1}-\d{3,4}-\d{3,5}$/, "Formato de cédula inválido"] 
     },
-    nivelEducativo: [
+    nivelEducativo:
         {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'registroNivelesEducativos', 
         required: true
-        }
-    ],
+        },
     annoLectivo:{
         type: Number,
         required: true,

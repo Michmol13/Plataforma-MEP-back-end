@@ -7,13 +7,12 @@ const schemaregistroListasUtiles = new mongoose.Schema({
         required: true,
         unique: false,
     },
-    nivelEducativo: [
+    nivelEducativo:
             {
             type: mongoose.Schema.Types.ObjectId,
             ref: 'registroNivelesEducativos', 
             required: true
-            }
-        ],
+            },
     fechaCreacion:{
         type: String,
         required: true,
@@ -28,7 +27,8 @@ const schemaregistroListasUtiles = new mongoose.Schema({
         {
             material: {
                 type: Schema.Types.ObjectId,
-                ref: 'registroMaterialesEscolares'
+                ref: 'registroMaterialesEscolares',
+                required: true
             },
             cantidad: {
                 type: Number,
