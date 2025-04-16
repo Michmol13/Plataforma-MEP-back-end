@@ -7,12 +7,11 @@ const schemaregistroListasUtiles = new mongoose.Schema({
         required: true,
         unique: false,
     },
-    nivelEducativo:
-            {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'registroNivelesEducativos', 
-            required: true
-            },
+    nivelEducativo:{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'registroNivelesEducativos', 
+        required: true
+    },
     fechaCreacion:{
         type: String,
         required: true,

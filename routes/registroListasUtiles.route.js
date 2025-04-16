@@ -4,14 +4,14 @@ const router = express.Router();
 const registroListasUtiles = require('../models/registroListaUtiles.model');
 
 router.post('/', async(req,res) =>{
-    const{nombreLista, fechaCreacion, estadoLista} = req.body;
+    const{nombreLista, nivelEducativo, fechaCreacion, estadoLista} = req.body;
 
-    if(!nombreLista || !fechaCreacion || !estadoLista){
+    if(!nombreLista || !nivelEducativo || !fechaCreacion || !estadoLista){
         return res.status(400).json({msj : 'Todos los campos son obligatorios'})
     }
 
     try{
-        const nuevoregistroListas = new registroListasUtiles({nombreLista, fechaCreacion, estadoLista});
+        const nuevoregistroListas = new registroListasUtiles({nombreLista, nivelEducativo, fechaCreacion, estadoLista});
         await nuevoregistroListas.save();
         res.status(201).json(nuevoregistroListas);
     }catch(error){

@@ -4,14 +4,14 @@ const registroMaterialesEscolares = require('../models/registroMaterialesEscolar
 
 
 router.post('/', async(req,res) =>{
-    const{nombreMaterial, descripcion, unidadMedida, estado} = req.body;
+    const{nombreMaterial, descripcion, categoria, unidadMedida, estado} = req.body;
 
-    if(!nombreMaterial ||!descripcion || !unidadMedida || !estado){
+    if(!nombreMaterial ||!descripcion || !categoria || !unidadMedida || !estado){
         return res.status(400).json({msj : 'Todos los campos son obligatorios'})
     }
 
     try{
-        const nuevoregistroMaterialesEscolares = new registroMaterialesEscolares ({nombreMaterial, descripcion, unidadMedida, estado});
+        const nuevoregistroMaterialesEscolares = new registroMaterialesEscolares ({nombreMaterial, descripcion, categoria, unidadMedida, estado});
         await nuevoregistroMaterialesEscolares.save();
         res.status(201).json(nuevoregistroMaterialesEscolares);
     }catch(error){

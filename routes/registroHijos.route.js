@@ -2,21 +2,31 @@ const express = require('express');
 const router = express.Router();
 const registroHijos = require('../models/registroHijos.model');
 
-router.post('/', async(req,res) =>{
-    const{nombrecompletoHijo, cedula, annoLectivo} = req.body;
+router.post('/', async (req, res) => {
+    const { nombrecompletoHijo, cedula, nivelEducativo, annoLectivo } = req.body;
 
-    if(!nombrecompletoHijo  || !cedula || !annoLectivo){
-        return res.status(400).json({msj : 'Todos los campos son obligatorios'})
+    if (!nombrecompletoHijo || !cedula || !nivelEducativo || !annoLectivo) {
+        return res.status(400).json({ msj: 'Todos los campos son obligatorios' });
     }
 
-    try{
-        const nuevoregistroHijos = new registroHijos({nombrecompletoHijo, cedula, annoLectivo});
+    try {
+        const existeCedula = await registroHijos.findOne({ cedula });
+        if (existeCedula) {
+            return res.status(400).json({ msj: 'Ya existe un hijo registrado con esta cédula.' });
+        }
+
+        const nuevoregistroHijos = new registroHijos({
+            nombrecompletoHijo,
+            cedula,
+            nivelEducativo,
+            annoLectivo
+        });
         await nuevoregistroHijos.save();
         res.status(201).json(nuevoregistroHijos);
-    }catch(error){
-        res.status(400).json({msj: error.message})
+    } catch (error) {
+        res.status(400).json({ msj: error.message });
     }
-} );
+});
 
 router.get('/', async(req,res) =>{
     try{
