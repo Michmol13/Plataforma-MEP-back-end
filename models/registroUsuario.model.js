@@ -10,7 +10,7 @@ const SchemaregistroUsuarios = new mongoose.Schema({
         type: String,
         unique: true,
         required: true,
-        match: [/^\d{1}-\d{3,4}-\d{3,5}$/, "Formato de cédula inválido"] // Formato: 1-2345-6789
+        match: [/^\d{1}-\d{3,4}-\d{3,5}$/, "Formato de cédula inválido"] 
     },
     correoElectronico: {
         type: String,
@@ -20,21 +20,21 @@ const SchemaregistroUsuarios = new mongoose.Schema({
     contrasena: {
         type: String,
         required: true,
-        minlength: 8 // Mínimo 8 caracteres
+        minlength: 8 
     },
     confirmarContrasena: {
         type: String,
         required: true,
         validate: {
             validator: function (value) {
-                return value === this.contrasena; // Debe coincidir con la contraseña
+                return value === this.contrasena;
             },
             message: "Las contraseñas no coinciden"
         }
     },
     rol: {
         type: String,
-        enum: ["Maestro", "Padre de familia"], // Lista desplegable con opciones fijas
+        enum: ["Maestro", "Padre de familia"], 
         required: true
     },
     estadoCuenta: {

@@ -14,6 +14,11 @@ router.post('/', async (req, res) => {
     }
 
     try {
+        const existeCedula = await registroUsuario.findOne({ cedula });
+                if (existeCedula) {
+                    return res.status(400).json({ msj: 'Ya existe un hijo registrado con esta cédula.' });
+                }
+
         const nuevousuario = new registroUsuario({
             nombreCompleto,
             cedula,
