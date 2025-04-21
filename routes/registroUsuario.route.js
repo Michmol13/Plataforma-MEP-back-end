@@ -5,7 +5,7 @@ const registroUsuario = require('../models/registroUsuario.model');
 router.post('/', async (req, res) => {
     const { nombreCompleto, cedula, correoElectronico, contrasena, confirmarContrasena, rol, estadoCuenta } = req.body;
 
-    if (!nombreCompleto || !cedula || !correoElectronico || !contrasena || !confirmarContrasena || !rol || !estadoCuenta) {
+    if (!nombreCompleto || !cedula || !correoElectronico || !contrasena || !confirmarContrasena || !rol || estadoCuenta === undefined) {
         return res.status(400).json({ msj: 'Todos los campos obligatorios deben ser llenados.' });
     }
 
@@ -15,9 +15,9 @@ router.post('/', async (req, res) => {
 
     try {
         const existeCedula = await registroUsuario.findOne({ cedula });
-                if (existeCedula) {
-                    return res.status(400).json({ msj: 'Ya existe un hijo registrado con esta cédula.' });
-                }
+        if (existeCedula) {
+            return res.status(400).json({ msj: 'Ya existe un usuario registrado con esta cédula.' });
+        }
 
         const nuevousuario = new registroUsuario({
             nombreCompleto,
