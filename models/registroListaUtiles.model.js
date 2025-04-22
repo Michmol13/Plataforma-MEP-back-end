@@ -19,8 +19,7 @@ const schemaregistroListasUtiles = new mongoose.Schema({
     },
     estadoLista:{
         type: Boolean,
-        required: true, 
-        default: true
+        required: true
     },
     materiales: [
         {

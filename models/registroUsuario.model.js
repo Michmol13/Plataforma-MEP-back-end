@@ -40,7 +40,6 @@ const SchemaregistroUsuarios = new mongoose.Schema({
     estadoCuenta: {
         type: Boolean,
         required: true, 
-        default: true 
     }
 });
 

@@ -14,8 +14,7 @@ const schemaregistroNivelesEducativos = new mongoose.Schema({
     },
     estado: {
         type: Boolean,
-        required: true, 
-        default: true 
+        required: true 
     }
 });
 
