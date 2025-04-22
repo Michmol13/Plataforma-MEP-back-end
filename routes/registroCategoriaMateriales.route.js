@@ -4,10 +4,16 @@ const registroCategoriaMateriales = require('../models/registroCategoriaMaterial
 
 
 router.post('/', async (req, res) => {
+    const { nombre, descripcion } = req.body;
+
+    if (!nombre || !descripcion) {
+        return res.status(400).json({ msj: 'El nombre y la descripcion son obligatorios.' });
+    }
+
     try {
-        const nuevaCategoria = new registroCategoriaMateriales(req.body);
-        await nuevaCategoria.save();
-        res.status(201).json(nuevaCategoria);
+        const nuevoregistroCategoriaMateriales = new registroCategoriaMateriales(req.body);
+        await nuevoregistroCategoriaMateriales.save();
+        res.status(201).json(nuevoregistroCategoriaMateriales);
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
