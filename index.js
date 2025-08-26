@@ -20,7 +20,7 @@ app.use(express.json()); //Habilita el manejo de JSON en las peticiones
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json()); //Habilita el analisis de JSON en las peticiones
 app.use(cors({
-    origin: "https://michmol13.github.io/Plataforma-MEP-front-end/" 
+    origin: "https://michmol13.github.io" 
 }));
 
 mongoose.connect(process.env.MONGODB_URI,{
