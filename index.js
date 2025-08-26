@@ -19,7 +19,9 @@ const registroListaUtilesRoute = require('./routes/registroListasUtiles.route');
 app.use(express.json()); //Habilita el manejo de JSON en las peticiones 
 app.use(bodyParser.urlencoded({extended:true}));
 app.use(bodyParser.json()); //Habilita el analisis de JSON en las peticiones
-app.use(cors());
+app.use(cors({
+    origin: "https://michmol13.github.io/Plataforma-MEP-front-end/" 
+}));
 
 mongoose.connect(process.env.MONGODB_URI,{
     useNewUrlParser: true,
@@ -36,7 +38,7 @@ app.use('/registroNivelesEducativos', registroNivelesEducativosRoute);
 app.use('/registroListasUtiles', registroListaUtilesRoute);
 
 app.get('/', (req,res)=> {
-    res.send('Servidor en funcionamiento');
+    res.send('Backend corriendo en Render');
 })
 
 app.listen(PORT, ()=> {
